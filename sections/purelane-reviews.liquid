@@ -1,0 +1,146 @@
+{% comment %}
+  Section 05: Reviews Rail (#reviews)
+  Auto-marquee horizontal customer reviews band with merchant editable blocks
+{% endcomment %}
+
+{{ 'purelane-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="purelane-sec purelane-revband" id="reviews">
+  <div class="purelane-wrap">
+    <div class="purelane-revhead">
+      <span class="purelane-kicker">{{ section.settings.kicker }}</span>
+      <span class="agg"><span class="st">★★★★★</span> <b>{{ section.settings.rating }}</b> {{ section.settings.rating_subtitle }}</span>
+      <span class="agg">{{ section.settings.trust_label_1 }} <b>{{ section.settings.trust_label_highlight }}</b> {{ section.settings.trust_label_2 }}</span>
+    </div>
+  </div>
+
+  <div class="purelane-revrail" aria-label="Customer reviews slider">
+    <div class="purelane-revtrack">
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <article class="purelane-glass-2 purelane-rcard" {{ block.shopify_attributes }}>
+            <div class="st">★★★★★</div>
+            <h5>{{ block.settings.title }}</h5>
+            <p>{{ block.settings.body }}</p>
+            <div class="who">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 13 4 4L19 7"/>
+              </svg>
+              <b>{{ block.settings.author }}</b>
+              <span>· {{ block.settings.purchased_item }}</span>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Reviews Rail",
+  "tag": "section",
+  "class": "purelane-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "That's what they said"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "rating_subtitle",
+      "label": "Rating Subtitle",
+      "default": "from 8,000+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_1",
+      "label": "Trust Text Before Highlight",
+      "default": "Loved by"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_highlight",
+      "label": "Trust Highlighted Text",
+      "default": "12 lakh+"
+    },
+    {
+      "type": "text",
+      "id": "trust_label_2",
+      "label": "Trust Text After Highlight",
+      "default": "homes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Headline",
+          "default": "Works like a charm"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review Body",
+          "default": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer Name",
+          "default": "Anita"
+        },
+        {
+          "type": "text",
+          "id": "purchased_item",
+          "label": "Purchased Item",
+          "default": "Laundry detergent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Reviews Rail",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "title": "Works like a charm",
+            "author": "Anita",
+            "purchased_item": "Laundry detergent"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Best dishwash ever",
+            "author": "Priya",
+            "purchased_item": "Dishwash gel"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "author": "Rohit S.",
+            "purchased_item": "Floor cleaner"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

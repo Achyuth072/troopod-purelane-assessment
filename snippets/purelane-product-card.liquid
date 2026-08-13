@@ -1,0 +1,68 @@
+{% comment %}
+  Purelane Reusable Product Card Snippet
+  Handles:
+  - Real Shopify product data (images, title, price, compare_at_price, vendor, availability)
+  - Edge Case 1: Sold-out state badge and disabled button
+  - Edge Case 2: Missing image fallback using default CSS styling / SVG placeholder
+  - Edge Case 3: Long product titles safely truncated/clamped via CSS without breaking grid height
+{% endcomment %}
+
+<article class="purelane-card purelane-glass-2" id="purelane-product-card-{{ product.id | default: 'demo' }}">
+  <div class="shot">
+    {%- if product.available == false -%}
+      <span class="pill pill-soldout">Sold Out</span>
+    {%- elsif product.compare_at_price > product.price -%}
+      {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+      <span class="pill">{{ discount }}% OFF</span>
+    {%- elsif product.tags contains 'Bestseller' or product.tags contains 'bestseller' -%}
+      <span class="pill">Bestseller</span>
+    {%- endif -%}
+
+    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 300 }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          loading="lazy"
+          width="300"
+          height="300"
+        >
+      {%- else -%}
+        {% comment %} Edge Case 2: Fallback image representation when no image is uploaded {% endcomment %}
+        <div class="pimg p-kitchen" style="height: 120px; width: 80px;" aria-label="No image available"></div>
+      {%- endif -%}
+    </a>
+  </div>
+
+  <h3 title="{{ product.title | escape }}">
+    <a href="{{ product.url }}">{{ product.title }}</a>
+  </h3>
+
+  <div class="rate" aria-label="Rating 4.9 stars">
+    <b>★ 4.9</b> <span>(120+ reviews)</span>
+  </div>
+
+  <div class="pr">
+    <strong>{{ product.price | money }}</strong>
+    {%- if product.compare_at_price > product.price -%}
+      <s>{{ product.compare_at_price | money }}</s>
+    {%- endif -%}
+  </div>
+
+  {%- if product.available -%}
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="purelane-btn purelane-btn-primary">
+        Add to cart
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h13m-5-6 6 6-6 6"/>
+        </svg>
+      </button>
+    </form>
+  {%- else -%}
+    {% comment %} Edge Case 1: Sold-out button handling {% endcomment %}
+    <button type="button" class="purelane-btn purelane-btn-ghost purelane-btn-disabled" disabled>
+      Sold Out
+    </button>
+  {%- endif -%}
+</article>

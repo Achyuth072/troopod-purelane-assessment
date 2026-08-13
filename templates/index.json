@@ -1,75 +1,160 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "purelane_hero": {
+      "type": "purelane-hero",
+      "settings": {
+        "heading": "Clean That Lasts",
+        "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
+        "primary_cta_label": "Shop now",
+        "secondary_cta_label": "How it works"
+      },
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "badge_1": {
+          "type": "badge",
+          "settings": { "label": "Plant<br>powered" }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": { "label": "Safe for<br>kids & pets" }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": { "label": "Zero harsh<br>chemicals" }
+        }
+      },
+      "block_order": ["badge_1", "badge_2", "badge_3"]
+    },
+    "purelane_reviews": {
+      "type": "purelane-reviews",
+      "settings": {
+        "kicker": "That's what they said",
+        "rating": "4.8",
+        "rating_subtitle": "from 8,000+ reviews",
+        "trust_label_1": "Loved by",
+        "trust_label_highlight": "12 lakh+",
+        "trust_label_2": "homes"
+      },
+      "blocks": {
+        "rev_1": {
+          "type": "review",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "title": "Works like a charm",
+            "body": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author": "Anita",
+            "purchased_item": "Laundry detergent"
           }
         },
-        "button": {
-          "type": "buttons",
+        "rev_2": {
+          "type": "review",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Best dishwash ever",
+            "body": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author": "Priya",
+            "purchased_item": "Dishwash gel"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "body": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author": "Rohit S.",
+            "purchased_item": "Floor cleaner"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
+      "block_order": ["rev_1", "rev_2", "rev_3"]
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "purelane_combos": {
+      "type": "purelane-combos",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "heading": "Best-Selling Combos",
+        "subheading": "Curated pairs and trios for every area of your home, packaged together at maximum value."
+      },
+      "blocks": {
+        "combo_1": {
+          "type": "combo",
+          "settings": {
+            "is_featured": true,
+            "save_badge": "Save ₹249",
+            "flag": "Most Popular",
+            "item_count": "2",
+            "title": "Kitchen & Tap Duo",
+            "contents_label": "2 Full Size Bottles",
+            "description": "Our top rated pair for grease removal and hard water stain defense.",
+            "price": "₹349",
+            "compare_at": "₹598",
+            "discount": "41% OFF",
+            "fine_print": "Free shipping included"
+          }
+        },
+        "combo_2": {
+          "type": "combo",
+          "settings": {
+            "is_featured": false,
+            "save_badge": "Save ₹398",
+            "flag": "Best Value",
+            "item_count": "3",
+            "title": "Complete Home Trio",
+            "contents_label": "3 Full Size Bottles",
+            "description": "Kitchen spray, tap cleaner, and dishwash gel bundle.",
+            "price": "₹499",
+            "compare_at": "₹897",
+            "discount": "44% OFF",
+            "fine_print": "Free shipping included"
+          }
+        }
+      },
+      "block_order": ["combo_1", "combo_2"]
+    },
+    "purelane_bundles": {
+      "type": "purelane-bundles",
+      "settings": {
+        "heading": "Save Big With Bundles",
+        "subheading": "Stock up on plant-powered homecare essentials and enjoy up to 45% savings."
+      },
+      "blocks": {
+        "bundle_1": {
+          "type": "tier",
+          "settings": {
+            "is_best_value": false,
+            "badge": "Starter Kit",
+            "quantity_title": "3 Pack",
+            "subtitle": "Essential Trio",
+            "price": "₹499",
+            "compare_at": "₹897",
+            "features": "1x Kitchen Cleaner Spray\n1x Tap & Limescale Cleaner\n1x Dishwash Gel\nFree shipping nationwide"
+          }
+        },
+        "bundle_2": {
+          "type": "tier",
+          "settings": {
+            "is_best_value": true,
+            "badge": "Most Popular",
+            "quantity_title": "5 Pack",
+            "subtitle": "Whole Home Clean",
+            "price": "₹799",
+            "compare_at": "₹1,495",
+            "features": "2x Kitchen Cleaner Spray\n1x Tap Cleaner Spray\n1x Dishwash Gel\n1x Floor Cleaner Gel\nFree shipping nationwide"
+          }
+        }
+      },
+      "block_order": ["bundle_1", "bundle_2"]
+    },
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": {
+        "heading": "Shop All Products",
+        "subheading": "Clean every corner of your home with zero harsh chemicals.",
+        "products_to_show": 8
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "purelane_hero",
+    "purelane_reviews",
+    "purelane_combos",
+    "purelane_bundles",
+    "purelane_shop"
   ]
 }

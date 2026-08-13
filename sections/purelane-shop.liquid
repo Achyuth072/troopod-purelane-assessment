@@ -1,0 +1,109 @@
+{% comment %}
+  Section 02: Shop / Product Grid (#shop)
+  Merchant editable section for displaying products using reusable purelane-product-card snippet
+{% endcomment %}
+
+{{ 'purelane-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="purelane-sec" id="shop">
+  <div class="purelane-wrap">
+    <div class="purelane-glass purelane-sec-pad">
+      <div class="purelane-panel-head">
+        <h2 class="purelane-d2">{{ section.settings.heading }}</h2>
+        <div class="purelane-rule">
+          <i></i>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+            <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+          </svg>
+          <i></i>
+        </div>
+        {%- if section.settings.subheading != blank -%}
+          <p class="purelane-lede" style="margin: 12px auto 0;">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="purelane-shelf">
+        {%- assign collection = section.settings.collection -%}
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            {% render 'purelane-product-card', product: product %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment %} Demo fallback rendering {% endcomment -%}
+          {%- for i in (1..8) -%}
+            <article class="purelane-card purelane-glass-2">
+              <div class="shot">
+                {%- if i == 3 -%}
+                  <span class="pill pill-soldout">Sold Out</span>
+                {%- else -%}
+                  <span class="pill">20% OFF</span>
+                {%- endif -%}
+                <div class="pimg {% cycle 'p-kitchen', 'p-tap', 'p-laundry', 'p-toilet', 'p-floor', 'p-dish', 'p-handwash', 'p-metal' %}" style="height: 130px; width: 90px;"></div>
+              </div>
+              <h3>
+                {%- if i == 7 -%}
+                  {% comment %} Edge Case 3: Long Title {% endcomment %}
+                  Purelane Ultra Concentrated Plant-Based Multi-Surface Natural Herbal Floor Cleaner & Stain Remover Formula
+                {%- else -%}
+                  Purelane Eco Cleaner {{ i }}
+                {%- endif -%}
+              </h3>
+              <div class="rate"><b>★ 4.9</b> <span>(90+ reviews)</span></div>
+              <div class="pr">
+                <strong>₹299</strong>
+                <s>₹399</s>
+              </div>
+              {%- if i == 3 -%}
+                <button type="button" class="purelane-btn purelane-btn-ghost purelane-btn-disabled" disabled>Sold Out</button>
+              {%- else -%}
+                <button type="button" class="purelane-btn purelane-btn-primary">Add to cart</button>
+              {%- endif -%}
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Shop Grid",
+  "tag": "section",
+  "class": "purelane-shop-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clean every corner of your home with zero harsh chemicals."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Shop Grid"
+    }
+  ]
+}
+{% endschema %}

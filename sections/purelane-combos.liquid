@@ -1,0 +1,221 @@
+{% comment %}
+  Section 03: Best-selling Combos (#combos)
+  Horizontal scrollable rail of combo packs with merchant editable blocks
+{% endcomment %}
+
+{{ 'purelane-custom.css' | asset_url | stylesheet_tag }}
+
+<section class="purelane-sec" id="combos">
+  <div class="purelane-wrap">
+    <div class="purelane-glass purelane-sec-pad">
+      <div class="purelane-panel-head">
+        <h2 class="purelane-d2">{{ section.settings.heading }}</h2>
+        <div class="purelane-rule">
+          <i></i>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+            <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+          </svg>
+          <i></i>
+        </div>
+        {%- if section.settings.subheading != blank -%}
+          <p class="purelane-lede" style="margin: 12px auto 0;">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="purelane-comborail">
+        {%- for block in section.blocks -%}
+          <article class="purelane-combo purelane-glass-2 {% if block.settings.is_featured %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
+            <div class="tray">
+              {%- if block.settings.save_badge != blank -%}
+                <span class="save">{{ block.settings.save_badge }}</span>
+              {%- endif -%}
+              {%- if block.settings.flag != blank -%}
+                <span class="flag">{{ block.settings.flag }}</span>
+              {%- endif -%}
+
+              <div class="purelane-stack">
+                <div class="it">
+                  <div class="pimg p-kitchen"></div>
+                  <span>Kitchen Cleaner</span>
+                </div>
+                <div class="plus">+</div>
+                <div class="it">
+                  <div class="pimg p-tap"></div>
+                  <span>Tap Cleaner</span>
+                </div>
+                {%- if block.settings.item_count == '3' -%}
+                  <div class="plus">+</div>
+                  <div class="it">
+                    <div class="pimg p-dish"></div>
+                    <span>Dish Gel</span>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="body">
+              <h3>{{ block.settings.title }}</h3>
+              <div class="cnt">{{ block.settings.contents_label }}</div>
+              <p class="inc">{{ block.settings.description }}</p>
+
+              <div class="prow">
+                <strong>{{ block.settings.price }}</strong>
+                {%- if block.settings.compare_at != blank -%}
+                  <s>{{ block.settings.compare_at }}</s>
+                {%- endif -%}
+                {%- if block.settings.discount != blank -%}
+                  <em>{{ block.settings.discount }}</em>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.fine_print != blank -%}
+                <div class="fine">{{ block.settings.fine_print }}</div>
+              {%- endif -%}
+
+              <a class="purelane-btn purelane-btn-primary" href="{{ block.settings.button_link | default: '#shop' }}">
+                {{ block.settings.button_label | default: 'Add combo' }}
+              </a>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Best Combos",
+  "tag": "section",
+  "class": "purelane-combos-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best-Selling Combos"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Curated pairs and trios for every area of your home, packaged together at maximum value."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "combo",
+      "name": "Combo Card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_featured",
+          "label": "Highlight as Featured",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "save_badge",
+          "label": "Save Badge Label",
+          "default": "Save ₹249"
+        },
+        {
+          "type": "text",
+          "id": "flag",
+          "label": "Flag Label (e.g. Most Popular)",
+          "default": "Most Popular"
+        },
+        {
+          "type": "select",
+          "id": "item_count",
+          "label": "Number of Items",
+          "options": [
+            { "value": "2", "label": "2 Items" },
+            { "value": "3", "label": "3 Items" }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Combo Title",
+          "default": "Kitchen & Tap Duo"
+        },
+        {
+          "type": "text",
+          "id": "contents_label",
+          "label": "Contents Label",
+          "default": "2 Full Size Bottles"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Our top rated pair for grease removal and hard water stain defense."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹349"
+        },
+        {
+          "type": "text",
+          "id": "compare_at",
+          "label": "Compare Price",
+          "default": "₹598"
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "Discount Tag",
+          "default": "41% OFF"
+        },
+        {
+          "type": "text",
+          "id": "fine_print",
+          "label": "Fine Print",
+          "default": "Free shipping included"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Add combo"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Best Combos",
+      "blocks": [
+        {
+          "type": "combo",
+          "settings": {
+            "title": "Kitchen & Bathroom Duo",
+            "is_featured": true,
+            "save_badge": "Save ₹249",
+            "flag": "Most Popular"
+          }
+        },
+        {
+          "type": "combo",
+          "settings": {
+            "title": "Complete Home Trio",
+            "item_count": "3",
+            "save_badge": "Save ₹398",
+            "flag": "Best Value"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
