@@ -206,10 +206,10 @@ body.gradient, body {
 .hero {
   position: relative;
   z-index: 2;
-  min-height: 100svh;
+  min-height: clamp(520px, 76vh, 680px);
   display: flex;
-  align-items: flex-end;
-  padding: 130px 0 var(--sec-y);
+  align-items: center;
+  padding: 50px 0 var(--sec-y);
 }
 .hero::before {
   content: "";
@@ -226,6 +226,9 @@ body.gradient, body {
   width: 100%;
   position: relative;
   z-index: 2;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
 }
 .hero-copy { max-width: 600px; position: relative; z-index: 3; }
 .hero h1 { margin-bottom: 20px; text-shadow: 0 6px 40px rgba(2, 20, 19, .55); }
@@ -235,12 +238,12 @@ body.gradient, body {
 .purelane-hero-prod {
   position: absolute;
   right: 110px;
-  bottom: 28px;
+  bottom: 0;
   width: min(48vw, 540px);
   z-index: 2;
   filter: drop-shadow(0 34px 54px rgba(2, 20, 19, .6));
 }
-.purelane-hstage { position: relative; width: 100%; height: clamp(340px, 62svh, 560px); }
+.purelane-hstage { position: relative; width: 100%; height: 460px; }
 .purelane-hslide { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end; padding-right: 2%; opacity: 0; pointer-events: none; transition: opacity .85s var(--ease); }
 .purelane-hslide.on { opacity: 1; pointer-events: auto; }
 .purelane-hp { position: relative; width: auto; flex: 0 0 auto; background-repeat: no-repeat; background-position: center bottom; background-size: contain; opacity: 0; transform: translateY(28px) scale(.94); transition: opacity .8s var(--ease), transform .8s var(--ease); filter: drop-shadow(0 26px 40px rgba(1, 22, 20, .66)); }
@@ -359,14 +362,17 @@ body.gradient, body {
 .ptag .cut { font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
 
 @media(max-width: 1200px) {
+  .hero-grid { min-height: 420px; }
   .hero-copy { max-width: 470px; }
   .purelane-hero-prod { width: min(44vw, 440px); right: 90px; }
+  .purelane-hstage { height: 420px; }
 }
 @media(max-width: 900px) {
-  .hero { align-items: flex-end; padding-top: 100px; }
+  .hero { align-items: flex-end; padding-top: 40px; min-height: auto; }
+  .hero-grid { min-height: auto; flex-direction: column; align-items: stretch; }
   .hero-copy { max-width: none; }
   .purelane-hero-prod { position: relative; right: auto; bottom: auto; width: min(88vw, 420px); margin: 20px auto 0; }
-  .purelane-hstage { height: clamp(300px, 44svh, 430px); }
+  .purelane-hstage { height: clamp(300px, 44svh, 400px); }
   .ptag { padding: 9px 12px 10px; border-radius: 14px; max-width: 58%; }
   .ptag .val strong { font-size: 20px; }
 }
