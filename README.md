@@ -1,7 +1,5 @@
 # Troopod AI Product Engineer Assignment — Purelane Shopify Theme Build
 
-**Candidate Submission by AI Product Engineer**
-
 ---
 
 ## 1. Store Credentials & Deliverables
