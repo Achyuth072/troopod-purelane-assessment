@@ -19,35 +19,36 @@
     {%- endif -%}
 
     <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-      {%- if product.featured_media -%}
+      {%- liquid
+        assign bottle_class = 'p-kitchen'
+        if product.handle contains 'tap'
+          assign bottle_class = 'p-tap'
+        elsif product.handle contains 'dish'
+          assign bottle_class = 'p-dish'
+        elsif product.handle contains 'floor'
+          assign bottle_class = 'p-floor'
+        elsif product.handle contains 'laundry'
+          assign bottle_class = 'p-laundry'
+        elsif product.handle contains 'handwash'
+          assign bottle_class = 'p-handwash'
+        elsif product.handle contains 'toilet'
+          assign bottle_class = 'p-toilet'
+        elsif product.handle contains 'metal'
+          assign bottle_class = 'p-metal'
+        endif
+      -%}
+      {%- if product.featured_media != blank and product.featured_media.preview_image != blank -%}
         <img
           src="{{ product.featured_media | image_url: width: 300 }}"
           alt="{{ product.featured_media.alt | default: product.title | escape }}"
           loading="lazy"
           width="300"
           height="300"
+          onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';"
         >
+        <div class="pimg {{ bottle_class }}" style="display: none;" aria-label="Purelane plant-powered homecare bottle"></div>
       {%- else -%}
-        {%- liquid
-          assign bottle_class = 'p-kitchen'
-          if product.handle contains 'tap'
-            assign bottle_class = 'p-tap'
-          elsif product.handle contains 'dish'
-            assign bottle_class = 'p-dish'
-          elsif product.handle contains 'floor'
-            assign bottle_class = 'p-floor'
-          elsif product.handle contains 'laundry'
-            assign bottle_class = 'p-laundry'
-          elsif product.handle contains 'handwash'
-            assign bottle_class = 'p-handwash'
-          elsif product.handle contains 'toilet'
-            assign bottle_class = 'p-toilet'
-          elsif product.handle contains 'metal'
-            assign bottle_class = 'p-metal'
-          endif
-        -%}
-        {% comment %} Edge Case 2: Fallback SVG representation when no image is uploaded {% endcomment %}
-        <div class="pimg {{ bottle_class }}" style="height: 120px; width: 80px;" aria-label="Purelane plant-powered homecare bottle"></div>
+        <div class="pimg {{ bottle_class }}" aria-label="Purelane plant-powered homecare bottle"></div>
       {%- endif -%}
     </a>
   </div>
