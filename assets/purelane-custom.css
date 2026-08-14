@@ -189,6 +189,12 @@ body.gradient, body {
 .purelane-hslide.on { opacity: 1; pointer-events: auto; }
 .purelane-hp { position: relative; width: auto; flex: 0 0 auto; background-repeat: no-repeat; background-position: center bottom; background-size: contain; opacity: 0; transform: translateY(28px) scale(.94); transition: opacity .8s var(--ease), transform .8s var(--ease); filter: drop-shadow(0 26px 40px rgba(1, 22, 20, .66)); }
 .purelane-hslide.on .purelane-hp { opacity: 1; transform: none; }
+.purelane-hslide.hs1 .a, .hs1 .a { height: 100%; z-index: 3; }
+.purelane-hslide.hs2 .a, .hs2 .a { height: 80%; margin-right: -8%; z-index: 1; }
+.purelane-hslide.hs2 .b, .hs2 .b { height: 97%; z-index: 3; }
+.purelane-hslide.hs3 .a, .hs3 .a { height: 75%; margin-right: -8%; z-index: 1; order: 1; }
+.purelane-hslide.hs3 .c, .hs3 .c { height: 97%; z-index: 3; order: 2; }
+.purelane-hslide.hs3 .b, .hs3 .b { height: 79%; margin-left: -8%; z-index: 2; order: 3; }
 
 /* Badge Rail (Desktop) */
 .badges {
