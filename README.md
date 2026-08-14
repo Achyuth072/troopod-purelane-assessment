@@ -16,22 +16,23 @@
 
 All 5 core template sections from the `purelane-homepage.html` prototype have been converted into production-ready, merchant-editable Shopify Liquid sections:
 
-1. **`01` Hero Section (`sections/purelane-hero.liquid`)**:
+1. **Hero Section (`sections/purelane-hero.liquid`)**:
    - Dynamic headline, lead text, primary/secondary CTA links.
    - Merchant-editable value badges (Plant powered, Kids & pet safe, Zero harsh chemicals).
    - Interactive 3-tier product stage carousel with real-time dot controls, auto-play rotation, pause-on-hover, and Theme Editor lifecycle re-init listeners (`shopify:section:load`).
-2. **`02` Shop / Product Grid (`sections/purelane-shop.liquid`)**:
+2. **Shop / Product Grid (`sections/purelane-shop.liquid`)**:
    - Connects dynamically to native Shopify collection data (`collection.products` with fallback to `collections['all']`).
    - Uses the reusable `snippets/purelane-product-card.liquid` component.
    - Integrated Dawn `<product-form>` AJAX Add-to-Cart with dynamic loading spinners and sliding Cart Drawer.
-3. **`03` Best-Selling Combos (`sections/purelane-combos.liquid`)**:
+3. **Best-Selling Combos (`sections/purelane-combos.liquid`)**:
    - Horizontal scrollable rail for 2-item and 3-item combo packs.
    - Highlights featured combos with golden glassmorphism borders and custom discount pills (`Save ₹249`, `41% OFF`).
-4. **`04` Bundles Section (`sections/purelane-bundles.liquid`)**:
+4. **Bundles Section (`sections/purelane-bundles.liquid`)**:
    - Modular bundle tiers (Starter Kit, Whole Home Clean, etc.) with custom feature checklists.
-5. **`05` Customer Reviews Rail (`sections/purelane-reviews.liquid`)**:
+5. **Customer Reviews Rail (`sections/purelane-reviews.liquid`)**:
    - Smooth infinite marquee animation scrolling customer reviews.
    - Merchant-configurable star ratings, headline, customer name, and purchased product tags.
+
 
 ---
 
