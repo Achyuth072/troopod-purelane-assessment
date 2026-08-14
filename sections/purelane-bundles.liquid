@@ -62,8 +62,9 @@
               {%- endfor -%}
             </ul>
 
+            {%- capture default_btn_label -%}Get {{ block.settings.quantity_title }} Bundle{%- endcapture -%}
             <a class="purelane-btn purelane-btn-primary" href="{{ block.settings.button_link | default: '#shop' }}">
-              {{ block.settings.button_label | default: 'Choose Bundle' }}
+              {{ block.settings.button_label | default: default_btn_label }}
             </a>
           </article>
         {%- endfor -%}
