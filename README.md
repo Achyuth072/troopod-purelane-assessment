@@ -1,14 +1,10 @@
 # Troopod AI Product Engineer Assignment — Purelane Shopify Theme Build
 
----
-
 ## 1. Store Credentials & Deliverables
 
 - **Dev Store URL:** [https://purelane-dev-store-5cmx004r.myshopify.com/](https://purelane-dev-store-5cmx004r.myshopify.com/)
 - **Published Live Theme:** `Purelane Dawn` (Clean Shopify Dawn baseline)
 - **GitHub Repository:** Current Working Tree (`main` branch)
-
----
 
 ## 2. Completed Template Sections (Scope of Work)
 
@@ -31,9 +27,6 @@ All 5 core template sections from the `purelane-homepage.html` prototype have be
    - Smooth infinite marquee animation scrolling customer reviews.
    - Merchant-configurable star ratings, headline, customer name, and purchased product tags.
 
-
----
-
 ## 3. Data Schema, Metafields & Edge Cases Handling ("The Bar")
 
 ### Metafield Definitions Created
@@ -46,14 +39,11 @@ All 5 core template sections from the `purelane-homepage.html` prototype have be
    - Seeded Value: `"100% citrus"` on *Kitchen Cleaner Spray*
    - Purpose: Displays the product's primary plant-powered benefit and subtitle badge on card layouts.
 
-
 ### Reusable Product Card Component (`snippets/purelane-product-card.liquid`)
 All product cards across the store are rendered through a single reusable Liquid snippet handling all required edge cases:
 - **Edge Case 1 — Sold-Out Product:** Detects `product.available == false`. Automatically replaces the CTA with a disabled `"Sold Out"` button and renders a red frosted glass `"Sold Out"` badge.
 - **Edge Case 2 — Missing Image:** If `product.featured_media == blank`, gracefully falls back to an SVG vector product container without breaking layout aspect ratios.
 - **Edge Case 3 — Very Long Title:** Uses CSS multi-line line-clamp (`-webkit-line-clamp: 2`) with ellipsis so long titles wrap cleanly without disturbing grid alignment.
-
----
 
 ## 4. Accessibility & Performance ("The Bar")
 
@@ -61,3 +51,4 @@ All product cards across the store are rendered through a single reusable Liquid
 - **Reduced Motion:** Full `@media (prefers-reduced-motion: reduce)` support suppressing marquee animations and carousel shifts, coupled with a dynamic JS `matchMedia` listener.
 - **Core Web Vitals:** Preconnected Google Fonts (`Outfit` / `Inter`) with `font-display: swap`, added `loading="lazy"`, `decoding="async"`, and explicit `width`/`height` attributes to prevent Cumulative Layout Shift (CLS) and optimize Largest Contentful Paint (LCP).
 - **A11y Semantics:** Decorative SVGs marked with `aria-hidden="true"` and `focusable="false"`, section headings linked via `aria-labelledby`, ARIA tablist/selected states on hero stage navigation, and duplicate marquee track clones hidden from screen readers.
+
