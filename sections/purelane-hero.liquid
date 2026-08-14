@@ -136,11 +136,14 @@
       }
 
       function hplay() {
-        if (!htimer && !reduce) {
-          htimer = setInterval(function() {
-            hgo(hi + 1);
-          }, 3800);
+        if (reduce) return;
+        if (htimer) {
+          clearInterval(htimer);
+          htimer = null;
         }
+        htimer = setInterval(function() {
+          hgo(hi + 1);
+        }, 3800);
       }
 
       function hstop() {

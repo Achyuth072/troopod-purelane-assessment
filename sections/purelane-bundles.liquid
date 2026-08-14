@@ -30,11 +30,6 @@
               <span class="tag">{{ block.settings.badge }}</span>
             {%- endif -%}
 
-            <div class="qty">
-              {{ block.settings.quantity_title }}
-              <small>{{ block.settings.subtitle }}</small>
-            </div>
-
             <div class="purelane-tierpix {% if block.settings.quantity_title contains '5' %}five{% endif %}">
               {%- if block.settings.quantity_title contains '2' -%}
                 <div class="pimg p-kitchen" aria-label="Kitchen Cleaner"></div>
@@ -50,6 +45,11 @@
                 <div class="pimg p-tap" aria-label="Tap Cleaner"></div>
                 <div class="pimg p-dish" aria-label="Dishwash Gel"></div>
               {%- endif -%}
+            </div>
+
+            <div class="qty">
+              {{ block.settings.quantity_title }}
+              <small>{{ block.settings.subtitle }}</small>
             </div>
 
             <div class="price">
