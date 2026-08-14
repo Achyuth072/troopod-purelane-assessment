@@ -146,6 +146,7 @@
       "settings": {
         "heading": "Shop All Products",
         "subheading": "Clean every corner of your home with zero harsh chemicals.",
+        "collection": "all",
         "products_to_show": 8
       }
     }

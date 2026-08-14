@@ -4,6 +4,7 @@
 {% endcomment %}
 
 {{ 'purelane-custom.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <section class="purelane-sec" id="shop">
   <div class="purelane-wrap">
@@ -24,7 +25,7 @@
       </div>
 
       <div class="purelane-shelf">
-        {%- assign collection = section.settings.collection -%}
+        {%- assign collection = section.settings.collection | default: collections['all'] | default: collections.first -%}
         {%- if collection != blank and collection.products.size > 0 -%}
           {%- for product in collection.products limit: section.settings.products_to_show -%}
             {% render 'purelane-product-card', product: product %}

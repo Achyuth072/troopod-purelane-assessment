@@ -82,19 +82,27 @@
   </div>
 
   {%- if product.available -%}
-    <form method="post" action="{{ routes.cart_add_url }}">
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button type="submit" class="purelane-btn purelane-btn-primary">
-        Add to cart
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h13m-5-6 6 6-6 6"/>
-        </svg>
-      </button>
-    </form>
+    {%- assign product_form_id = 'purelane-form-' | append: section.id | append: '-' | append: product.id -%}
+    <product-form data-section-id="{{ section.id }}">
+      {%- form 'product', product, id: product_form_id, class: 'form purelane-card-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" name="add" class="purelane-btn purelane-btn-primary" aria-haspopup="dialog">
+          <span>Add to cart</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h13m-5-6 6 6-6 6"/>
+          </svg>
+          <div class="loading__spinner hidden">
+            <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </button>
+      {%- endform -%}
+    </product-form>
   {%- else -%}
     {% comment %} Edge Case 1: Sold-out button handling {% endcomment %}
     <button type="button" class="purelane-btn purelane-btn-ghost purelane-btn-disabled" disabled>
-      Sold Out
+      <span>Sold Out</span>
     </button>
   {%- endif -%}
 </article>

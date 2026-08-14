@@ -145,6 +145,62 @@ body.gradient, body {
   cursor: not-allowed;
   pointer-events: none;
 }
+.purelane-btn.loading > span,
+.purelane-btn.loading > svg:not(.spinner) {
+  opacity: 0;
+}
+.purelane-btn.loading > .loading__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.purelane-btn.loading > .loading__spinner .spinner {
+  width: 20px;
+  height: 20px;
+  animation: purelane-rot 1s linear infinite;
+}
+.purelane-btn.loading > .loading__spinner .path {
+  stroke: #08211a;
+}
+@keyframes purelane-rot {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Stage Navigation Dots */
+.hdots {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14px;
+  position: relative;
+  z-index: 5;
+}
+.hdots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(236, 230, 247, .28);
+  border: none;
+  cursor: pointer;
+  transition: .4s var(--ease);
+}
+.hdots button.on {
+  background: var(--accent);
+  width: 22px;
+  border-radius: 999px;
+}
+.hdots button:hover:not(.on) {
+  background: rgba(236, 230, 247, .5);
+}
 
 /* Hero Section Layout */
 .hero {

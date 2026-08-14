@@ -69,7 +69,7 @@
     </div>
 
     <div class="purelane-hero-prod" id="heroProd-{{ section.id }}">
-      <div class="purelane-hstage">
+      <div class="purelane-hstage" id="hstage-{{ section.id }}">
         <div class="purelane-hslide hs1 on" data-n="1">
           <span class="purelane-hp p-kbtl a d1" role="img" aria-label="Purelane kitchen cleaner spray bottle"></span>
           <div class="purelane-glass-2 ptag">
@@ -81,10 +81,115 @@
             <span class="cut">{{ section.settings.tier_1_tag }}</span>
           </div>
         </div>
+        <div class="purelane-hslide hs2" data-n="2">
+          <span class="purelane-hp p-tbtl a d1" role="img" aria-label="Purelane tap cleaner spray bottle"></span>
+          <span class="purelane-hp p-kbtl b d2" role="img" aria-label="Purelane kitchen cleaner spray bottle"></span>
+          <div class="purelane-glass-2 ptag">
+            <span class="lbl">{{ section.settings.tier_2_title }}</span>
+            <span class="val">
+              <strong>{{ section.settings.tier_2_price }}</strong>
+              <s>{{ section.settings.tier_2_compare_at }}</s>
+            </span>
+            <span class="cut">{{ section.settings.tier_2_tag }}</span>
+          </div>
+        </div>
+        <div class="purelane-hslide hs3" data-n="3">
+          <span class="purelane-hp p-tbtl a d1" role="img" aria-label="Purelane tap cleaner spray bottle"></span>
+          <span class="purelane-hp p-mbtl b d2" role="img" aria-label="Purelane metal cleaner bottle"></span>
+          <span class="purelane-hp p-kbtl c d3" role="img" aria-label="Purelane kitchen cleaner spray bottle"></span>
+          <div class="purelane-glass-2 ptag">
+            <span class="lbl">{{ section.settings.tier_3_title }}</span>
+            <span class="val">
+              <strong>{{ section.settings.tier_3_price }}</strong>
+              <s>{{ section.settings.tier_3_compare_at }}</s>
+            </span>
+            <span class="cut">{{ section.settings.tier_3_tag }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="hdots" id="hdots-{{ section.id }}" aria-label="Hero product stage navigation">
+        <button type="button" class="on" aria-label="Show 1 product"></button>
+        <button type="button" aria-label="Show 2 products"></button>
+        <button type="button" aria-label="Show 3 products"></button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    function initHeroStage(sectionId) {
+      var hstage = document.getElementById('hstage-' + sectionId);
+      var hdotsWrap = document.getElementById('hdots-' + sectionId);
+      if (!hstage || !hdotsWrap) return;
+
+      var hs = [].slice.call(hstage.querySelectorAll('.purelane-hslide'));
+      var hd = [].slice.call(hdotsWrap.querySelectorAll('button'));
+      var hi = 0;
+      var htimer = null;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function hgo(n) {
+        hi = (n + hs.length) % hs.length;
+        hs.forEach(function(s, i) { s.classList.toggle('on', i === hi); });
+        hd.forEach(function(d, i) { d.classList.toggle('on', i === hi); });
+      }
+
+      function hplay() {
+        if (!htimer && !reduce) {
+          htimer = setInterval(function() {
+            hgo(hi + 1);
+          }, 3800);
+        }
+      }
+
+      function hstop() {
+        if (htimer) {
+          clearInterval(htimer);
+          htimer = null;
+        }
+      }
+
+      hd.forEach(function(d, i) {
+        d.addEventListener('click', function() {
+          hstop();
+          hgo(i);
+          hplay();
+        });
+      });
+
+      hstage.addEventListener('mouseenter', hstop);
+      hstage.addEventListener('mouseleave', hplay);
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              hplay();
+            } else {
+              hstop();
+            }
+          });
+        }, { threshold: 0.2 });
+        observer.observe(hstage);
+      } else {
+        hplay();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initHeroStage('{{ section.id }}');
+    });
+
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(event) {
+        if (event.detail.sectionId === '{{ section.id }}') {
+          initHeroStage('{{ section.id }}');
+        }
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -128,7 +233,7 @@
     },
     {
       "type": "header",
-      "content": "Stage Product Tag Settings"
+      "content": "Stage Tier 1 (Single Bottle)"
     },
     {
       "type": "text",
@@ -153,6 +258,62 @@
       "id": "tier_1_tag",
       "label": "Tier 1 Tag",
       "default": "33% off"
+    },
+    {
+      "type": "header",
+      "content": "Stage Tier 2 (Any 2 Products)"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_title",
+      "label": "Tier 2 Title",
+      "default": "Any 2 products"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_price",
+      "label": "Tier 2 Price",
+      "default": "₹349"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_compare_at",
+      "label": "Tier 2 Compare Price",
+      "default": "₹598"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_tag",
+      "label": "Tier 2 Tag",
+      "default": "Save ₹249"
+    },
+    {
+      "type": "header",
+      "content": "Stage Tier 3 (Any 3 Products)"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_title",
+      "label": "Tier 3 Title",
+      "default": "Any 3 products"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_price",
+      "label": "Tier 3 Price",
+      "default": "₹499"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_compare_at",
+      "label": "Tier 3 Compare Price",
+      "default": "₹897"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_tag",
+      "label": "Tier 3 Tag",
+      "default": "Save ₹398"
     }
   ],
   "blocks": [
