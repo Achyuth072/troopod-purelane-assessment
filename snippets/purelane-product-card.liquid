@@ -28,8 +28,26 @@
           height="300"
         >
       {%- else -%}
-        {% comment %} Edge Case 2: Fallback image representation when no image is uploaded {% endcomment %}
-        <div class="pimg p-kitchen" style="height: 120px; width: 80px;" aria-label="No image available"></div>
+        {%- liquid
+          assign bottle_class = 'p-kitchen'
+          if product.handle contains 'tap'
+            assign bottle_class = 'p-tap'
+          elsif product.handle contains 'dish'
+            assign bottle_class = 'p-dish'
+          elsif product.handle contains 'floor'
+            assign bottle_class = 'p-floor'
+          elsif product.handle contains 'laundry'
+            assign bottle_class = 'p-laundry'
+          elsif product.handle contains 'handwash'
+            assign bottle_class = 'p-handwash'
+          elsif product.handle contains 'toilet'
+            assign bottle_class = 'p-toilet'
+          elsif product.handle contains 'metal'
+            assign bottle_class = 'p-metal'
+          endif
+        -%}
+        {% comment %} Edge Case 2: Fallback SVG representation when no image is uploaded {% endcomment %}
+        <div class="pimg {{ bottle_class }}" style="height: 120px; width: 80px;" aria-label="Purelane plant-powered homecare bottle"></div>
       {%- endif -%}
     </a>
   </div>
@@ -37,6 +55,19 @@
   <h3 title="{{ product.title | escape }}">
     <a href="{{ product.url }}">{{ product.title }}</a>
   </h3>
+
+  {%- assign eco_metafield = product.metafields.custom.eco_certifications | default: product.metafields.custom.eco_badge | default: product.metafields.custom.key_benefit -%}
+  {%- if eco_metafield != blank -%}
+    <div class="purelane-card-metafield">
+      <span class="purelane-meta-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+        </svg>
+        {{ eco_metafield }}
+      </span>
+    </div>
+  {%- endif -%}
 
   <div class="rate" aria-label="Rating 4.9 stars">
     <b>★ 4.9</b> <span>(120+ reviews)</span>

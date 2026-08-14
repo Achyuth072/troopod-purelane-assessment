@@ -373,8 +373,8 @@ body.gradient, body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .03em;
-  color: var(--surface);
-  line-height: 1.2;
+  color: var(--surface) !important;
+  line-height: 1.25;
   margin-bottom: 7px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -382,8 +382,40 @@ body.gradient, body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.purelane-card h3 a, .purelane-card h4 a {
+  color: var(--surface) !important;
+  text-decoration: none !important;
+  transition: color .2s var(--ease);
+}
+.purelane-card h3 a:hover, .purelane-card h4 a:hover {
+  color: var(--accent) !important;
+}
+.purelane-card .shot a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
 .purelane-card .rate { font-size: 11.5px; color: var(--paper-2); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
 .purelane-card .rate b { color: var(--accent); font-weight: 700; }
+.purelane-card-metafield { margin-bottom: 9px; }
+.purelane-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(240, 160, 60, .10);
+  border: 1px solid rgba(240, 160, 60, .26);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.purelane-meta-pill svg { width: 10px; height: 10px; color: var(--accent); }
 .purelane-card .pr { margin-top: auto; display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
 .purelane-card .pr strong { font-family: 'Outfit', sans-serif; font-size: 18px; color: var(--surface); font-weight: 700; }
 .purelane-card .pr s { font-size: 12px; color: var(--paper-3); }
