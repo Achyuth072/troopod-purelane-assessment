@@ -107,10 +107,10 @@
           </div>
         </div>
       </div>
-      <div class="hdots" id="hdots-{{ section.id }}" aria-label="Hero product stage navigation">
-        <button type="button" class="on" aria-label="Show 1 product"></button>
-        <button type="button" aria-label="Show 2 products"></button>
-        <button type="button" aria-label="Show 3 products"></button>
+      <div class="hdots" id="hdots-{{ section.id }}" role="tablist" aria-label="Hero product stage navigation">
+        <button type="button" role="tab" aria-selected="true" class="on" aria-label="Show 1 product tier"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Show 2 products tier"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Show 3 products tier"></button>
       </div>
     </div>
   </div>
@@ -127,12 +127,28 @@
       var hd = [].slice.call(hdotsWrap.querySelectorAll('button'));
       var hi = 0;
       var htimer = null;
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var reduce = mediaQuery.matches;
+
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', function(e) {
+          reduce = e.matches;
+          if (reduce) {
+            hstop();
+          } else {
+            hplay();
+          }
+        });
+      }
 
       function hgo(n) {
         hi = (n + hs.length) % hs.length;
         hs.forEach(function(s, i) { s.classList.toggle('on', i === hi); });
-        hd.forEach(function(d, i) { d.classList.toggle('on', i === hi); });
+        hd.forEach(function(d, i) {
+          var isOn = (i === hi);
+          d.classList.toggle('on', isOn);
+          d.setAttribute('aria-selected', isOn ? 'true' : 'false');
+        });
       }
 
       function hplay() {

@@ -42,6 +42,7 @@
           src="{{ product.featured_media | image_url: width: 300 }}"
           alt="{{ product.featured_media.alt | default: product.title | escape }}"
           loading="lazy"
+          decoding="async"
           width="300"
           height="300"
           onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';"
@@ -61,7 +62,7 @@
   {%- if eco_metafield != blank -%}
     <div class="purelane-card-metafield">
       <span class="purelane-meta-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
           <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
         </svg>
@@ -71,7 +72,7 @@
   {%- endif -%}
 
   <div class="rate" aria-label="Rating 4.9 stars">
-    <b>★ 4.9</b> <span>(120+ reviews)</span>
+    <b aria-hidden="true">★ 4.9</b> <span>(120+ reviews)</span>
   </div>
 
   <div class="pr">
@@ -88,7 +89,7 @@
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
         <button type="submit" name="add" class="purelane-btn purelane-btn-primary" aria-haspopup="dialog">
           <span>Add to cart</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h13m-5-6 6 6-6 6"/>
           </svg>
           <div class="loading__spinner hidden">

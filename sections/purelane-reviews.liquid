@@ -18,12 +18,12 @@
     <div class="purelane-revtrack">
       {%- for i in (1..4) -%}
         {%- for block in section.blocks -%}
-          <article class="purelane-glass-2 purelane-rcard" {{ block.shopify_attributes }}>
-            <div class="st">★★★★★</div>
+          <article class="purelane-glass-2 purelane-rcard"{% if i > 1 %} aria-hidden="true"{% endif %} {{ block.shopify_attributes }}>
+            <div class="st" aria-label="5 out of 5 stars">★★★★★</div>
             <h5>{{ block.settings.title }}</h5>
             <p>{{ block.settings.body }}</p>
             <div class="who">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m5 13 4 4L19 7"/>
               </svg>
               <b>{{ block.settings.author }}</b>

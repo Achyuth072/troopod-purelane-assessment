@@ -6,14 +6,14 @@
 {{ 'purelane-custom.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-<section class="purelane-sec" id="shop">
+<section class="purelane-sec" id="shop" aria-labelledby="shop-heading-{{ section.id }}">
   <div class="purelane-wrap">
     <div class="purelane-glass purelane-sec-pad">
       <div class="purelane-panel-head">
-        <h2 class="purelane-d2">{{ section.settings.heading }}</h2>
-        <div class="purelane-rule">
+        <h2 class="purelane-d2" id="shop-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        <div class="purelane-rule" aria-hidden="true">
           <i></i>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
             <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
           </svg>
