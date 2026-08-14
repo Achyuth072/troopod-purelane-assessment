@@ -25,7 +25,13 @@
 
     <div class="hero-copy">
       <h1 class="purelane-d1">
-        {{ section.settings.heading | replace: 'Lasts', '<span class="purelane-lime">Lasts</span>' }}
+        {%- liquid
+          assign formatted_heading = section.settings.heading | replace: 'Lasts', '<span class="purelane-lime">Lasts</span>'
+          if formatted_heading contains '[' and formatted_heading contains ']'
+            assign formatted_heading = formatted_heading | replace: '[', '<span class="purelane-lime">' | replace: ']', '</span>'
+          endif
+        -%}
+        {{ formatted_heading }}
       </h1>
 
       <div class="purelane-rule">
